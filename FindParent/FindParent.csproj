@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <LangVersion>9.0</LangVersion>
+    </PropertyGroup>
+    <PropertyGroup>
+        <PackageId>EfCoreExtensions.FindParent</PackageId>
+        <Version>1.0.2</Version>
+        <Authors>Caleb Bertrand</Authors>
+        <Title>Find Parent</Title>
+        <Description>
+            An entity framework core extension method to find a related parent entity any number of  tables (or joins) away.
+            Traverses the db context model to find the optimal join path, then dynamically generates a queryable of chained selects along the path.
+        </Description>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <PackageLicenseUrl>https://opensource.org/licenses/MIT</PackageLicenseUrl>
+        <DefaultPushSource>https://api.nuget.org/v3/index.json</DefaultPushSource>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.12" />
+    </ItemGroup>
+
+</Project>
