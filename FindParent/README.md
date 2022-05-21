@@ -11,7 +11,7 @@ Say there is a table structure where Garages have multiple Cars, Cars have multi
 If you wanted to know the parent Garage of the Bolt with an Id of 1, you could get it via:
 
 ````
-  Garage garageFromBolt = context.FindParent&lsaquo;Bolt, Garage&rsaquo;(1).FirstOrDefault();
+  Garage garageFromBolt = context.FindParent<Bolt, Garage>(1).FirstOrDefault();
 ````
 
 The method uses Dijkstra’s shortest path algorithm to find the shortest path to the parent.
