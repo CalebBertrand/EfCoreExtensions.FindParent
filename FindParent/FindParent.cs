@@ -34,7 +34,7 @@ public static class EfCoreExtensions
         }
         catch
         {
-            throw new NotSupportedException("The child table type does not have exactly one primary key property.");
+            throw new NotSupportedException("The child table must not have a composite primary key.");
         }
 
         if (sourceTableIdProp == null)
