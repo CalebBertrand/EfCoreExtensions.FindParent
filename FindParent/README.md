@@ -1,4 +1,8 @@
 # FindParent
+```
+public static IQueryable<TParent> FindParent<TChild, TParent>(this DbContext context, object childId)
+```
+
 An entity framework core extension method to find a parent entity any number of ancestors away.
 Traverses the db context model to find the optimal path, then dynamically generates a queryable of chained selects along the path.
 Example:
@@ -14,5 +18,6 @@ The method uses Dijkstra’s shortest path algorithm to find the shortest path t
 (Meaning the translated SQL has the lowest number of expensive joins!)
 
 ## Possible Exceptions
-If the child table has a composite key, will throw a NotSupportedException.
-If either the child or parent Types do not correspond to tables in the context model, will throw an ArgumentException.
+1. If the child table has a composite key, will throw a NotSupportedException.
+2. If either the child or parent Types do not correspond to tables in the context model, will throw an ArgumentException.
+3. If the child id's type is not assignable to the child table's primary key property, will throw an ArgumentException.
