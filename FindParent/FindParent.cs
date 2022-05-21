@@ -27,10 +27,10 @@ public static class EfCoreExtensions
         where TParent : class
         where TChild : class
     {
-        string sourceTableIdProp;
+        IProperty sourceTableIdProp;
         try
         {
-            sourceTableIdProp = context.Model.FindEntityType(typeof(TChild))?.FindPrimaryKey().Properties.Single().Name;
+            sourceTableIdProp = context.Model.FindEntityType(typeof(TChild))?.FindPrimaryKey().Properties.Single();
         }
         catch
         {
@@ -40,7 +40,10 @@ public static class EfCoreExtensions
         if (sourceTableIdProp == null)
             throw new ArgumentException("The child type is not associated with any table.");
 
-        var sourceQueryable = FilterByChildId(context.Set<TChild>(), sourceTableIdProp, childId);
+        if (!childId.GetType().IsAssignableTo(sourceTableIdProp.PropertyInfo.PropertyType))
+            throw new ArgumentException("The child id is not assignable to the id property of the specified TChild.");
+        
+        var sourceQueryable = FilterByChildId(context.Set<TChild>(), sourceTableIdProp.Name, childId);
 
         if (typeof(TChild) == typeof(TParent)) return (IQueryable<TParent>)sourceQueryable;
 
